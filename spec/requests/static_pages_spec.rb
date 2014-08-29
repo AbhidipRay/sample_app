@@ -20,6 +20,13 @@ describe "StaticPages" do
       visit("/static_pages/about")
       expect(page).to have_content("About")
     end
+
+    describe "'Contact' page" do
+      it "should have content 'Contact'" do
+        visit("/static_pages/contact")
+        expect(page).to have_content("Contact Us")
+      end
+    end
   end
 
   describe "inspect title change" do
@@ -36,6 +43,11 @@ describe "StaticPages" do
     it "should have title as 'Ruby on Rails Tutorial Sample App | About Us' on about page" do
       visit("/static_pages/about")
       expect(page).to have_title("Ruby on Rails Tutorial Sample App | About Us")
+    end
+
+    it "should have title as 'Ruby on Rails Tutorial Sample App | Contact Us' on about page" do
+      visit("/static_pages/contact")
+      expect(page).to have_title("Ruby on Rails Tutorial Sample App | Contact Us")
     end
   end
 end

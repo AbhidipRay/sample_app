@@ -3,7 +3,7 @@ SampleApp::Application.routes.draw do
 #  get "static_pages/help"
   resources :static_pages do
     collection do
-      get :home, :help, :about
+      get :home, :help, :about, :contact
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
