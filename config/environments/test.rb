@@ -26,6 +26,9 @@ SampleApp::Application.configure do
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
 
+  # Speed up tests by lowering bcrypt's cost function.
+  ActiveModel::SecurePassword.min_cost = true
+
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
