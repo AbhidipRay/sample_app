@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:session][:password])
       sign_in @user
       flash[:success] = "Welcome"
-      redirect_to user_path(@user)
+      redirect_back_or user_path(@user)
     else
       flash.now[:error] = "Invalid credentails!"
       render 'new'
