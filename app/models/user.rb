@@ -6,10 +6,23 @@ class User < ActiveRecord::Base
   has_secure_password
 
   before_save :downcase_email
+  before_create :create_remeber_token
+
+  def User.new_remember_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def User.digest(token)
+    Digest::SHA1.hexdigest(token.to_s)
+  end
 
   private
 
   def downcase_email
     self.email = email.downcase
+  end
+
+  def create_remeber_token
+    self.remember_token = User.digest(User.new_remember_token)
   end
 end
