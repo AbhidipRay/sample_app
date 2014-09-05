@@ -29,12 +29,6 @@ describe "User pages" do
       end
     end
 
-    it "should list each user" do
-      User.all.each do |user|
-        expect(page).to have_selector('li', text: user.name)
-      end
-    end
-
     describe "delete links" do
 
       it { should_not have_link('delete') }
@@ -90,9 +84,17 @@ describe "User pages" do
 
   describe "Profile page" do
     let!(:user) { FactoryGirl.create(:user) }
+    let!(:micropost_1) { FactoryGirl.create(:micropost, user: user) }
+    let!(:micropost_2) { FactoryGirl.create(:micropost, user: user, content: "Second micropost") }
     before { visit user_path(user) }
     it { should have_content(user.name) }
     it { should have_title(user.name) }
+
+    describe "microposts" do
+      it { should have_content(micropost_1.content) }
+      it { should have_content(micropost_2.content) }
+      it { should have_content(user.microposts.count) }
+    end
   end
 
   describe "Edit page" do
